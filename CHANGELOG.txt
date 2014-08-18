@@ -1,0 +1,128 @@
+-- planned    
+
+    - NEW: Snapshots should describe each thread separately.
+    - NEW: Snapshots should allow incremental updates by sharing constant pools
+    - NEW: Add a thread state monitor in the form of a timeline
+    - NEW: Use atomic variables to decrease monitor contention
+    - NEW: Improve graph layout algorithm.
+    - NEW: Allow the user to hide methods in the call graph view
+    - NEW: Provide some presets for Tomcat and JBoss    
+    - NEW: load the last project when the console starts
+    - NEW: show the connection status and project name in the title
+    - BUG: Fix call tree problems
+    - NEW: allow the user to disable memory and thread monitoring
+    - BUG: improve precision of measurements
+    - NEW: class cache should be aynchronous
+    - NEW: show summary in class list (e.g. number of classes)
+    - NEW: add checkbox "include system threads" to thread list      
+    - NEW: Create tests
+    - NEW: user configurable options in call tree
+    - NEW: show snaphost history
+    - NEW: disable save button when there´s nothing new to save
+    - NEW: Allow the console to save and load snapshots. 
+    - NEW: Add an allocation tracer
+    - NEW: Provide a minimal bundled documentation        
+    - NEW: Add a menu option to check for newer releases
+    - NEW: allow the console to override agent verbosity on-the-fly
+    - NEW: agent should have the option to save locally the log
+    - NEW: agent should be able to send the log to the console
+    - BUG: NoClassDefFoundException when in javac (pretty weird since the refencerd 
+           class does not exist in the libs)
+    - NEW: improve method reloading criteria to take into account the options as well           
+    - NEW: show class count
+    - NEW: paint callboxes instead of simple hover tooltips (cool)
+    - NEW: add summary in the thread panel (combobox?)
+    - NEW: use flexdock    
+    * JOutlookBar
+    
+    * use the work dir as profiler4j-<SERVER_PORT>.tmp
+    * in the class list show classes/interfaces with different icons
+    
+1.0-beta3 (unreleased)
+    - BUG: class cache is ambiguous with the boot class loader
+    - BUG: Added initial support to BEA JRockit
+    - NEW: Users can now customize the list of classes excluded from instrumentation
+    - BUG: Agent logger not showing exception correctly in win32 console
+    - NEW: decreased to 1% of contribuition required to appear in the call tree (in the 
+           next release this will be changed be the user)
+    - NEW: improved progress feedback when reloading classes
+    - NEW: improved error handling when reloading classes (automatic detail pane)
+    - NEW: repackage ASM to avoid conflicts with profiled applications
+    - NEW: support for temporary classloaders (via WeakRef)
+    - NEW: automatic work dir clean-up and locking
+    - NEW: removed restriction on almost all core packages
+    - NEW: class transformation is done entirely in another agent thread
+    - NEW: class transformation is always scheduled to some milliseconds in the future
+           to wait for class loading stabilization
+    - NEW: replaced Javassist by ASM
+    - NEW: Show tooltips during startup
+    - NEW: improved console bootstrap
+    - NEW: added source-code dist
+    - NEW: Allow the user to export 'Call Graph' and 'Call Tree' as PNG files as they are 
+           shown in GUI currently (suggested by Jesper Pedersen)
+    - NEW: many refactorings
+    
+1.0-beta2 (2006-06-25)
+
+    - BUG: [1511199] Startup Error in Linux
+    - NEW: added basic thread monitoring support    
+        
+1.0-beta1
+
+    - BUG [1505201] Library bootstrap
+    - NEW: major refactoring in the console with a new event-driven architecture. Now
+            it´s much more easier to add UI features.
+    - NEW: load/save project settings    
+    - NEW: added monitoring for non-heap memory
+    - NEW: many UI improvements
+    - NEW: added some internal stats to the agent and some other minor improvements
+
+1.0-alpha7
+    
+    - NEW: network protocol redesigned from stracth (no serialization)
+    - BUG: deadlock when redefining classes in JBoss
+    - NEW: progress notification in long taks
+    - NEW: class list show instrumentation status
+    - BUG: class list not cleared on disconnect
+    - NEW: improved rule editor (color)
+    
+1.0-alpha6
+
+    - NEW: default verbosity set to 1
+    - NEW: agent should redefine only really needed classes    
+    - BUG: cannot close console onf agent error
+    - BUG: console not exiting process when closed
+    - BUG: Error redefining org.apache.tomcat.jni.OS class (being skipped now)
+    - NEW: replaced usage of monitors by reentrant locks (faster with high contention)
+
+1.0-alpha5
+  
+    - NEW: ultra-fast snapshot serialization (must less memory required)
+    - NEW: decreased memory overhead hugely
+    - NEW: unblocking UI when connecting/ desconnecting/ appying rules/ taking snapshots
+    - NEW: show enhanceable classes and allow the user to easly create rules
+    - NEW: validate agent and console versions in a network handshake
+    - NEW: show methods' details in the graph
+    - NEW: reduced the max number of visible methods in call graph
+    - NEW: minor UI improvements
+    - NEW: increased to 5 min memory monitor history
+    - BUG: parsing of agent parameters  
+    - BUG: client should disconnect cleanly when the user closes the window without an 
+            explicity disconnect
+    - BUG: EOFException in remote JVM during disconnect
+    - NEW: many refactorings
+    
+1.0-alpha4
+
+    - NEW: on-the-fly reconfiguration of the profiling agent    
+    - NEW: configuration parameters (waitconn e verbosity) for the agent command line    
+    - NEW: dialog to edit the profiling rules for the current session    
+    - NEW: improve visualization for recursive methods
+    - NEW: really improved call graph view based on well-routed splines    
+    - NEW: replace ptplot by jfreechart
+        
+1.0-alpha3
+
+    - BUG: bug with property defaultRuleOptions    
+    - NEW: separated agent and console modules into two different jars    
+    - NEW: added memory monitor for the remove JVM

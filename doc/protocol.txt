@@ -1,0 +1,30 @@
+
+
+struct SNAPSHOT {
+	
+	int magic
+	int version
+	int session
+	long snapshotTime
+	
+	int sysPropertyCount
+	struct SYS_PROPERTY {
+		utf8 key
+		utf8 value
+	}
+	
+	int methodCount	
+	struct METHOD_INFO {
+	
+		char methodId
+		int hits
+		long netTime
+		long selfTime
+		
+		short childCount
+		struct CHILD_INFO {
+			char childMethodId
+			long childTime
+		}		
+	}
+}

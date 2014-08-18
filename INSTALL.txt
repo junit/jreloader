@@ -1,0 +1,11 @@
+You need only to add a couple of vm arguments, as in the example below:
+
+java -noverify -javaagent:c:\tools\jreloader.jar -Djreloader.dirs=c:\project\target\classes com.foo.Main
+
+or
+
+java -noverify -javaagent:c:\tools\jreloader.jar -Djreloader.dirs=c:\project\target\classes -jar foo.jar
+
+If you have multiple modules, you can add more than one class dir:
+
+	-Djreloader.dirs=c:\project\target\classes,c:\project2\target\classes,c:\project2\target\classes

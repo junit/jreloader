@@ -1,0 +1,73 @@
+<!--
+ * Copyright 2008,2009 Antonio S. R. Gomes
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<project name="jreloader" default="build" basedir=".">
+
+	<property name="version" value="0.4" />
+	<property name="name" value="jreloader" />
+	<property name="asmlib" value="lib/asm-all-3.0_RC1.jar" />
+	<property name="deploy.dir" value="target/${name}-${version}" />
+
+	<taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="build_lib/jarjar-0.7.jar" />
+
+	<target name="compile">
+		<mkdir dir="target/classes" />
+		<copy todir="target/classes">
+			<fileset dir="src/java" includes="**/*.xml,**/*.properties" />
+		</copy>
+		<javac destdir="target/classes" target="1.5" source="1.5" debug="true">
+			<src path="src/java" />
+			<classpath>
+				<fileset dir="lib" includes="*.jar" />
+			</classpath>
+		</javac>
+		<!--
+		<mkdir dir="${deploy.dir}/lib" />
+		-->
+		<copy file="LICENSE-2.0.txt" todir="${deploy.dir}" />
+		<copy file="CHANGELOG.txt" todir="${deploy.dir}" />
+		<copy file="INSTALL.txt" todir="${deploy.dir}" />
+	</target>
+
+	<target name="build" depends="compile">
+		<!-- Create the special jar for the agent -->
+		<jarjar jarfile="${deploy.dir}/${name}.jar" basedir="target/classes" index="yes" includes="net/sf/jreloader/agent/**/*.*">
+			<manifest>
+				<attribute name="Premain-Class" value="net.sf.jreloader.agent.Agent" />
+				<attribute name="Boot-Class-Path" value="${name}.jar" />
+				<attribute name="Can-Redefine-Classes" value="true" />
+			</manifest>
+			<!--
+			<zipfileset src="${asmlib}" />
+			<rule pattern="org.objectweb.asm.**" result="net.sf.jreloader.agent.asm.@1" />
+			-->
+		</jarjar>
+	</target>
+
+	<target name="dist" depends="clean,build">
+		<zip destfile="target/${name}-${version}/${name}-src.zip">
+			<zipfileset dir="." includes="**/*.*" excludes="target/**/*.*,**/Thumbs.db" prefix="${name}-${version}" />
+		</zip>
+		<zip destfile="target/${name}-${version}.zip">
+			<zipfileset dir="${deploy.dir}" prefix="${name}-${version}" />
+		</zip>
+	</target>
+
+	<target name="clean">
+		<delete dir="target" />
+	</target>
+
+</project>
